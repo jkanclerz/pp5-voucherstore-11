@@ -6,6 +6,8 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.*;
+
 public class ProductCatalogTest {
 
     public static final String MY_DESCRIPTION = "My Fancy Product";
@@ -65,9 +67,44 @@ public class ProductCatalogTest {
 
         List<Product> products = api.allPublishedProducts();
 
-        Assert.assertEquals(1, products.size());
+        assertThat(products)
+                .hasSize(1)
+                .extracting(Product::getId)
+                .contains(productId)
+                .doesNotContain(draftProductId);
     }
 
+    @Test
+    public void itDenyActionOnNotExistedProductV1() {
+        try {
+            ProductCatalogFacade api = thereIsProductCatalog();
+            api.applyPrice("notExists", BigDecimal.valueOf(20));
+            Assert.fail("Should throw exception");
+        } catch (ProductNotFoundException e) {
+            Assert.assertTrue(true);
+        }
+    }
+
+    @Test(expected = ProductNotFoundException.class)
+    public void itDenyActionOnNotExistedProductV2() {
+        ProductCatalogFacade api = thereIsProductCatalog();
+        api.applyPrice("notExists", BigDecimal.valueOf(20));
+        api.updateProductDetails("notExists", "desc", "img");
+    }
+
+    @Test
+    public void itDenyActionOnNotExistedProductV3() {
+        ProductCatalogFacade api = thereIsProductCatalog();
+
+        assertThatThrownBy(() -> api.applyPrice("notExists", BigDecimal.valueOf(20)))
+                .hasMessage("There is no product with id: notExists");
+
+        assertThatThrownBy(() -> api.updateProductDetails("notExists", "desc", "pic"))
+                .hasMessage("There is no product with id: notExists");
+
+        assertThatThrownBy(() -> api.getById("notExists"))
+                .hasMessage("There is no product with id: notExists");
+    }
 
     private static ProductCatalogFacade thereIsProductCatalog() {
         return new ProductCatalogConfiguration().productCatalogFacade();
