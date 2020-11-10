@@ -3,7 +3,10 @@ package pl.jkanclerz.voucherstore.productcatalog;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
+import javax.sql.DataSource;
 import java.math.BigDecimal;
 
 @Configuration
@@ -38,5 +41,13 @@ public class ProductCatalogConfiguration {
         return productCatalogFacade;
     }
 
-
+//    @Bean
+//    DataSource myDataSource() {
+//        return new EmbeddedDatabaseBuilder()
+//                .setType(EmbeddedDatabaseType.H2)
+//                .addScript("classpath:jdbc/schema.sql")
+//                .addScript("classpath:jdbc/initial-data.sql")
+//                .build()
+//        ;
+//    }
 }
