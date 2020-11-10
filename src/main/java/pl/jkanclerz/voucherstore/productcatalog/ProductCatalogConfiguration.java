@@ -16,11 +16,6 @@ public class ProductCatalogConfiguration {
         return new ProductCatalogFacade(new HashMapProductStorage());
     }
 
-    @Bean
-    public ProductStorage productionProductStorage() {
-        return new HashMapProductStorage();
-//        return new JDBCProductStorage("mysql://localhost:3306/voucher-shop");
-    }
 
     @Bean
     public ProductCatalogFacade fixturesAwareProductCatalogFacade(ProductStorage productStorage) {
