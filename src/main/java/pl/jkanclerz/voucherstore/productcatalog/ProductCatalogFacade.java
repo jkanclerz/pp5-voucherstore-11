@@ -31,12 +31,16 @@ public class ProductCatalogFacade {
 
         product.setDescription(myDescription);
         product.setPicture(myPicture);
+
+        productStorage.save(product);
     }
 
     public void applyPrice(String productId, BigDecimal price) {
         Product product = getProductOrException(productId);
 
         product.setPrice(price);
+
+        productStorage.save(product);
     }
 
     public List<Product> allPublishedProducts() {

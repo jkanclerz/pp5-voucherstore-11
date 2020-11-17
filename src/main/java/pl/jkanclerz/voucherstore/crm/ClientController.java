@@ -1,10 +1,8 @@
 package pl.jkanclerz.voucherstore.crm;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.repository.query.Param;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -23,5 +21,10 @@ public class ClientController {
     @GetMapping("/api/clients")
     public List<Client> clients() {
         return clientRepository.findAll();
+    }
+
+    @DeleteMapping("/api/clients/{id}")
+    public void deleteById(@Param("id") Integer id) {
+        clientRepository.deleteById(id);
     }
 }
