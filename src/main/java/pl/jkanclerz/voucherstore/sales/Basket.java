@@ -1,6 +1,7 @@
 package pl.jkanclerz.voucherstore.sales;
 
 import pl.jkanclerz.voucherstore.productcatalog.Product;
+import pl.jkanclerz.voucherstore.sales.exceptions.NotEnoughProductsException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -34,7 +35,11 @@ public class Basket {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public void add(Product product) {
+    public void add(Product product, Inventory inventory) {
+        if (!inventory.isAvailable(product.getId())) {
+            throw new NotEnoughProductsException();
+        }
+
         if (!isContains(product)) {
             putIntoBasket(product);
         } else {

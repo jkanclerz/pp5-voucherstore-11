@@ -28,7 +28,7 @@ public class BasketTest {
         Basket basket = Basket.empty();
         Product product = thereIsProduct(PRODUCT_1);
         //Act
-        basket.add(product);
+        basket.add(product, thereIsAlwaysAvailableInventory());
         //Assert
         assertThat(basket.isEmpty())
                 .isFalse();
@@ -41,8 +41,8 @@ public class BasketTest {
         Product product1 = thereIsProduct(PRODUCT_1);
         Product product2 = thereIsProduct(PRODUCT_2);
         //Act
-        basket.add(product1);
-        basket.add(product2);
+        basket.add(product1, thereIsAlwaysAvailableInventory());
+        basket.add(product2, thereIsAlwaysAvailableInventory());
         //Assert
         assertThat(basket.isEmpty())
                 .isFalse();
@@ -57,8 +57,8 @@ public class BasketTest {
         Basket basket = Basket.empty();
         Product product1 = thereIsProduct(PRODUCT_1);
         //Act
-        basket.add(product1);
-        basket.add(product1);
+        basket.add(product1, thereIsAlwaysAvailableInventory());
+        basket.add(product1, thereIsAlwaysAvailableInventory());
 
         assertThat(basket.getProductsCount())
                 .isEqualTo(1);
@@ -73,12 +73,25 @@ public class BasketTest {
         Product product1 = thereIsProduct(PRODUCT_1);
         Product product2 = thereIsProduct(PRODUCT_2);
         //Act
-        basket.add(product1);
-        basket.add(product1);
-        basket.add(product2);
+        basket.add(product1, thereIsAlwaysAvailableInventory());
+        basket.add(product1, thereIsAlwaysAvailableInventory());
+        basket.add(product2, thereIsAlwaysAvailableInventory());
 
         basketContainsProductWithQuantity(basket, product1, 2);
         basketContainsProductWithQuantity(basket, product2, 1);
+    }
+
+    @Test
+    public void itDennyToAddProductWith0Inventory() {
+        Basket basket = Basket.empty();
+        Product product1 = thereIsProduct(PRODUCT_1);
+
+        assertThatThrownBy(() -> basket.add(product1, (productId) -> false))
+                .hasMessage("There is not enough products available");
+    }
+
+    private Inventory thereIsAlwaysAvailableInventory() {
+        return (productId -> true);
     }
 
     private void basketContainsProductWithQuantity(Basket basket, Product product1, int expectedQuantity) {
