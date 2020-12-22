@@ -1,6 +1,7 @@
-package pl.jkanclerz.voucherstore.sales;
+package pl.jkanclerz.voucherstore.sales.basket;
 
 import pl.jkanclerz.voucherstore.productcatalog.Product;
+import pl.jkanclerz.voucherstore.sales.Inventory;
 import pl.jkanclerz.voucherstore.sales.exceptions.NotEnoughProductsException;
 
 import java.util.*;
