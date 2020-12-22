@@ -3,12 +3,11 @@ package pl.jkanclerz.voucherstore.sales.basket;
 import org.junit.Test;
 import pl.jkanclerz.voucherstore.productcatalog.Product;
 import pl.jkanclerz.voucherstore.sales.Inventory;
-import pl.jkanclerz.voucherstore.sales.basket.Basket;
-import pl.jkanclerz.voucherstore.sales.basket.BasketLine;
 
 import java.util.UUID;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class BasketTest {
 
