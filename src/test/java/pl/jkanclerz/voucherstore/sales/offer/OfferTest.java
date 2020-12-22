@@ -2,6 +2,7 @@ package pl.jkanclerz.voucherstore.sales.offer;
 
 import org.junit.Test;
 import pl.jkanclerz.voucherstore.sales.basket.BasketLine;
+import pl.jkanclerz.voucherstore.sales.product.ProductDetails;
 
 import java.math.BigDecimal;
 import java.util.Arrays;

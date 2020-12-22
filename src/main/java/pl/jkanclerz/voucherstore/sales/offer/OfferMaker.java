@@ -1,6 +1,8 @@
 package pl.jkanclerz.voucherstore.sales.offer;
 
 import pl.jkanclerz.voucherstore.sales.basket.BasketLine;
+import pl.jkanclerz.voucherstore.sales.product.ProductDetails;
+import pl.jkanclerz.voucherstore.sales.product.ProductDetailsProvider;
 
 import java.math.BigDecimal;
 import java.util.List;

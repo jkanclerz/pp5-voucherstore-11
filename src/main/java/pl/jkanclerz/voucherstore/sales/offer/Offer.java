@@ -20,4 +20,8 @@ public class Offer {
     public List<OrderLine> getOfferLines() {
         return Collections.unmodifiableList(orderLines);
     }
+
+    public boolean isEqual(Offer currentOffer) {
+        return true;
+    }
 }

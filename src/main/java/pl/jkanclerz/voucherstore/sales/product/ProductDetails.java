@@ -1,4 +1,4 @@
-package pl.jkanclerz.voucherstore.sales.offer;
+package pl.jkanclerz.voucherstore.sales.product;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
