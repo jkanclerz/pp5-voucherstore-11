@@ -13,7 +13,7 @@ public class SalesFacade {
     InMemoryBasketStorage basketStorage;
     CurrentCustomerContext currentCustomerContext;
     Inventory inventory;
-    private OfferMaker offerMaker;
+    OfferMaker offerMaker;
 
     public SalesFacade(ProductCatalogFacade productCatalogFacade, InMemoryBasketStorage basketStorage, CurrentCustomerContext currentCustomerContext, Inventory inventory, OfferMaker offerMaker) {
         this.productCatalogFacade = productCatalogFacade;
