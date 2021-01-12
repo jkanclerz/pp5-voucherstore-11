@@ -1,0 +1,15 @@
+header, main {
+    width: 100%;
+    border-bottom: 1px solid #000;
+}
+
+.products {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style: none;
+}
+
+.product {
+    margin: auto;
+}
