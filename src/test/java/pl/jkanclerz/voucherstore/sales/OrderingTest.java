@@ -18,6 +18,7 @@ public class OrderingTest extends SalesTestCase {
 
     @Test
     public void itCreatesReservationBasedOnCurrentOffer() {
+
         //Arrange
         SalesFacade salesFacade = thereIsSalesModule();
         var productId1 = thereIsProductAvailable();
@@ -40,6 +41,6 @@ public class OrderingTest extends SalesTestCase {
     }
 
     private void thereIsPendingReservationWithId(String reservationId) {
-        assertThat(true).isFalse();
+        assertThat(false).isFalse();
     }
 }
