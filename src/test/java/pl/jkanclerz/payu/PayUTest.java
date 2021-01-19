@@ -1,6 +1,12 @@
 package pl.jkanclerz.payu;
 
 import org.junit.Test;
+import pl.jkanclerz.payu.exceptions.PayUException;
+import pl.jkanclerz.payu.http.JavaHttpPayUApiClient;
+import pl.jkanclerz.payu.model.Buyer;
+import pl.jkanclerz.payu.model.CreateOrderResponse;
+import pl.jkanclerz.payu.model.OrderCreateRequest;
+import pl.jkanclerz.payu.model.Product;
 
 import java.util.Arrays;
 import java.util.UUID;

@@ -1,4 +1,6 @@
-package pl.jkanclerz.payu;
+package pl.jkanclerz.payu.http;
+
+import pl.jkanclerz.payu.exceptions.PayUException;
 
 import java.io.IOException;
 import java.net.URI;
@@ -8,7 +10,7 @@ import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.util.Map;
 
-public class JavaHttpPayUApiClient {
+public class JavaHttpPayUApiClient implements PayUApiClient {
     private final HttpClient httpClient;
 
     public JavaHttpPayUApiClient() {
@@ -17,6 +19,7 @@ public class JavaHttpPayUApiClient {
                 .build();
     }
 
+    @Override
     public HttpResponse<String> post(String url, String body, Map<String, String> headers) throws PayUException {
         var httpRequestBuilder = HttpRequest.newBuilder()
                 .uri(URI.create(url))

@@ -1,4 +1,4 @@
-package pl.jkanclerz.payu;
+package pl.jkanclerz.payu.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

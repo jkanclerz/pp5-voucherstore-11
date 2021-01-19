@@ -2,7 +2,7 @@ package pl.jkanclerz.voucherstore.sales;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import pl.jkanclerz.payu.JavaHttpPayUApiClient;
+import pl.jkanclerz.payu.http.JavaHttpPayUApiClient;
 import pl.jkanclerz.payu.PayU;
 import pl.jkanclerz.payu.PayUCredentials;
 import pl.jkanclerz.voucherstore.productcatalog.ProductCatalogFacade;
@@ -29,7 +29,7 @@ public class SalesConfiguration {
     @Bean
     PaymentGateway payUPaymentGateway() {
         return new PayUPaymentGateway(new PayU(
-                PayUCredentials.sandbox(),
+                PayUCredentials.productionOfEnv(),
                 new JavaHttpPayUApiClient()
         ));
     }

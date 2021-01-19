@@ -36,4 +36,13 @@ public class PayUCredentials {
                 clientSecret,
                 "https://secure.payu.com");
     }
+
+    public static PayUCredentials productionOfEnv() {
+        return new PayUCredentials(
+                System.getenv("PAYU_POS_ID"),
+                System.getenv("PAYU_SECOND_KEY"),
+                System.getenv("PAYU_CLIENT_ID"),
+                System.getenv("PAYU_CLIENT_SECRET"),
+                "https://secure.payu.com");
+    }
 }

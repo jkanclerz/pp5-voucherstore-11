@@ -1,4 +1,4 @@
-package pl.jkanclerz.payu;
+package pl.jkanclerz.payu.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
