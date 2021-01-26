@@ -18,4 +18,9 @@ public class ListProductStorage implements ProductStorage {
     public List<Product> allPublishedProducts() {
         return null;
     }
+
+    @Override
+    public void clear() {
+
+    }
 }

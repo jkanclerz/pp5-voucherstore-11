@@ -1,5 +1,6 @@
 package pl.jkanclerz.voucherstore.productcatalog;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
@@ -16,4 +17,8 @@ public interface ProductStorage extends Repository<Product, String> {
 
     @Query("Select p from Product p where p.price is NOT NULL and p.description IS NOT NULL")
     List<Product> allPublishedProducts();
+
+    @Modifying
+    @Query("Delete from Product")
+    void clear();
 }

@@ -1,10 +1,8 @@
 package pl.jkanclerz.voucherstore.sales;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.jkanclerz.voucherstore.sales.offer.Offer;
+import pl.jkanclerz.voucherstore.sales.payment.PaymentUpdateStatusRequest;
 
 @RestController
 public class SalesController {
@@ -28,5 +26,12 @@ public class SalesController {
     @PostMapping("/api/accept-offer")
     public void acceptOffer() {
 
+    }
+
+    @PostMapping("/api/payment/status")
+    public void updatePaymentStatus(@RequestHeader("OpenPayu-Signature") String signatureHeader, @RequestBody String body) {
+        PaymentUpdateStatusRequest paymentUpdateStatusRequest = PaymentUpdateStatusRequest.of(signatureHeader, body);
+
+        sales.handlePaymentStatusChanged(paymentUpdateStatusRequest);
     }
 }
