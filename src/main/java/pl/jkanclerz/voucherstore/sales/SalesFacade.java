@@ -9,6 +9,7 @@ import pl.jkanclerz.voucherstore.sales.offer.OfferMaker;
 import pl.jkanclerz.voucherstore.sales.ordering.ClientData;
 import pl.jkanclerz.voucherstore.sales.ordering.OfferChangedException;
 import pl.jkanclerz.voucherstore.sales.ordering.Reservation;
+import pl.jkanclerz.voucherstore.sales.ordering.ReservationRepository;
 import pl.jkanclerz.voucherstore.sales.payment.PaymentDetails;
 import pl.jkanclerz.voucherstore.sales.payment.PaymentGateway;
 import pl.jkanclerz.voucherstore.sales.payment.PaymentUpdateStatusRequest;
@@ -22,14 +23,16 @@ public class SalesFacade {
     Inventory inventory;
     OfferMaker offerMaker;
     PaymentGateway paymentGateway;
+    private final ReservationRepository reservationRepository;
 
-    public SalesFacade(ProductCatalogFacade productCatalogFacade, InMemoryBasketStorage basketStorage, CurrentCustomerContext currentCustomerContext, Inventory inventory, OfferMaker offerMaker, PaymentGateway paymentGateway) {
+    public SalesFacade(ProductCatalogFacade productCatalogFacade, InMemoryBasketStorage basketStorage, CurrentCustomerContext currentCustomerContext, Inventory inventory, OfferMaker offerMaker, PaymentGateway paymentGateway, ReservationRepository reservationRepository) {
         this.productCatalogFacade = productCatalogFacade;
         this.basketStorage = basketStorage;
         this.currentCustomerContext = currentCustomerContext;
         this.inventory = inventory;
         this.offerMaker = offerMaker;
         this.paymentGateway = paymentGateway;
+        this.reservationRepository = reservationRepository;
     }
 
     public void addProduct(String productId1) {
@@ -65,6 +68,8 @@ public class SalesFacade {
         Reservation reservation = Reservation.of(currentOffer, clientData);
 
         PaymentDetails reservationPaymentDetails = paymentGateway.register(reservation);
+
+        reservationRepository.save(reservation);
 
         return  reservationPaymentDetails;
     }
