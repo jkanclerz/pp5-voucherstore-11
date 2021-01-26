@@ -1,5 +1,7 @@
 package pl.jkanclerz.payu;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import pl.jkanclerz.payu.exceptions.PayUException;
 import pl.jkanclerz.payu.http.JavaHttpPayUApiClient;
@@ -27,6 +29,28 @@ public class PayUTest {
         assertThat(r.getExtOrderId()).isEqualTo(mySystemOrderId);
         assertThat(r.getOrderId()).isNotNull();
         assertThat(r.getRedirectUri()).isNotNull();
+    }
+
+    @Test
+    public void itCalculateSignatureBasedOnSecondKey() {
+        var payu = thereIsPayU();
+        var exampleOrderAsString = "sample_oder";
+        var expectedSignature = "FEA263A585D00A131F0CAB2B0A3FEBC0";
+
+        assertThat(payu.isTrusted(exampleOrderAsString, expectedSignature)).isTrue();
+    }
+
+    @Test
+    public void itVerifySignatureBasedOnJsonNotification() throws JsonProcessingException {
+        var payu = thereIsPayU();
+        var orderId = "my-1234567890";
+        var exampleOrder = thereIsExampleOrderCreate(orderId);
+        var orderAsString = new ObjectMapper().writeValueAsString(exampleOrder);
+        var expectedSignature = "9F0CABCCAB8ACD476C7387A349E778C8";
+        var invalidSignature = "123abc";
+
+        assertThat(payu.isTrusted(orderAsString, invalidSignature)).isFalse();
+        assertThat(payu.isTrusted(orderAsString, expectedSignature)).isTrue();
     }
 
     private PayU thereIsPayU() {
