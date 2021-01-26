@@ -55,4 +55,9 @@ public class JdbcProductStorage implements ProductStorage {
     public List<Product> allPublishedProducts() {
         return jdbcTemplate.query(SELECT_PUBLISHED, getProductRowMapper());
     }
+
+    @Override
+    public void clear() {
+        jdbcTemplate.update("delete from `products_catalog__products`");
+    }
 }
