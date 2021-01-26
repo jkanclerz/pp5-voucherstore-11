@@ -5,6 +5,8 @@ import pl.jkanclerz.voucherstore.productcatalog.ProductCatalogConfiguration;
 import pl.jkanclerz.voucherstore.productcatalog.ProductCatalogFacade;
 import pl.jkanclerz.voucherstore.sales.basket.InMemoryBasketStorage;
 import pl.jkanclerz.voucherstore.sales.offer.OfferMaker;
+import pl.jkanclerz.voucherstore.sales.payment.DummyPaymentGateway;
+import pl.jkanclerz.voucherstore.sales.payment.PaymentGateway;
 import pl.jkanclerz.voucherstore.sales.product.ProductDetails;
 
 import java.math.BigDecimal;

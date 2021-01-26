@@ -6,6 +6,13 @@ import pl.jkanclerz.voucherstore.sales.basket.Basket;
 import pl.jkanclerz.voucherstore.sales.basket.InMemoryBasketStorage;
 import pl.jkanclerz.voucherstore.sales.offer.Offer;
 import pl.jkanclerz.voucherstore.sales.offer.OfferMaker;
+import pl.jkanclerz.voucherstore.sales.ordering.ClientData;
+import pl.jkanclerz.voucherstore.sales.ordering.OfferChangedException;
+import pl.jkanclerz.voucherstore.sales.ordering.Reservation;
+import pl.jkanclerz.voucherstore.sales.payment.PaymentDetails;
+import pl.jkanclerz.voucherstore.sales.payment.PaymentGateway;
+import pl.jkanclerz.voucherstore.sales.payment.PaymentUpdateStatusRequest;
+import pl.jkanclerz.voucherstore.sales.payment.PaymentVerificationException;
 
 public class SalesFacade {
 
@@ -45,7 +52,7 @@ public class SalesFacade {
         return offerMaker.calculateOffer(basket.getBasketItems());
     }
 
-    public ReservationPaymentDetails acceptOffer(Offer seenOffer, ClientData clientData) {
+    public PaymentDetails acceptOffer(Offer seenOffer, ClientData clientData) {
         Basket basket = basketStorage.loadForCustomer(getCurrentCustomerId())
                 .orElse(Basket.empty());
 
@@ -57,7 +64,7 @@ public class SalesFacade {
 
         Reservation reservation = Reservation.of(currentOffer, clientData);
 
-        ReservationPaymentDetails reservationPaymentDetails = paymentGateway.register(reservation);
+        PaymentDetails reservationPaymentDetails = paymentGateway.register(reservation);
 
         return  reservationPaymentDetails;
     }

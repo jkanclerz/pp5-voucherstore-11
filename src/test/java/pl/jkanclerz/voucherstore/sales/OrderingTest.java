@@ -3,6 +3,8 @@ package pl.jkanclerz.voucherstore.sales;
 import org.junit.Before;
 import org.junit.Test;
 import pl.jkanclerz.voucherstore.sales.offer.Offer;
+import pl.jkanclerz.voucherstore.sales.ordering.ClientData;
+import pl.jkanclerz.voucherstore.sales.payment.PaymentDetails;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -32,7 +34,7 @@ public class OrderingTest extends SalesTestCase {
         salesFacade.addProduct(productId2);
         Offer seenOffer = salesFacade.getCurrentOffer();
 
-        ReservationPaymentDetails paymentDetails = salesFacade.acceptOffer(seenOffer, clientProvideHisData());
+        PaymentDetails paymentDetails = salesFacade.acceptOffer(seenOffer, clientProvideHisData());
 
         thereIsPendingReservationWithId(paymentDetails.getReservationId());
         thereIsPaymentRegisteredForReservation(paymentDetails.getReservationId());

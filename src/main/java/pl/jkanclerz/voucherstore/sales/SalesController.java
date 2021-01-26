@@ -2,6 +2,7 @@ package pl.jkanclerz.voucherstore.sales;
 
 import org.springframework.web.bind.annotation.*;
 import pl.jkanclerz.voucherstore.sales.offer.Offer;
+import pl.jkanclerz.voucherstore.sales.payment.PaymentUpdateStatusRequest;
 
 @RestController
 public class SalesController {
