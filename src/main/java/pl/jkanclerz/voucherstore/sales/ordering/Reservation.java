@@ -16,6 +16,8 @@ import java.util.stream.Collectors;
 @Entity
 public class Reservation {
 
+    Reservation() {}
+
     @Id
     String id;
 
@@ -35,6 +37,7 @@ public class Reservation {
         this.clientData = clientData;
         this.items = items;
         this.total = total;
+        items.forEach((item -> item.reservation = this));
     }
 
     public static Reservation of(Offer currentOffer, ClientData clientData) {

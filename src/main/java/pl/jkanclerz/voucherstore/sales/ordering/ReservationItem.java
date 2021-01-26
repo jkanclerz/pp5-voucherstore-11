@@ -1,23 +1,23 @@
 package pl.jkanclerz.voucherstore.sales.ordering;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
 public class ReservationItem {
     @Id
+    @GeneratedValue
     Integer id;
     @ManyToOne
     @JoinColumn(name = "reservation_id")
-    private Reservation reservation;
+    Reservation reservation;
 
     private String productId;
     private String description;
     private BigDecimal unitPrice;
     private int quantity;
+
+    ReservationItem() {}
 
     public ReservationItem(String productId, String description, BigDecimal unitPrice, int quantity) {
         this.productId = productId;
