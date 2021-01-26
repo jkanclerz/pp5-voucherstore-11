@@ -10,6 +10,7 @@ public class PayUCredentials {
     private final String clientId;
     private final String clientSecret;
     private final String baseUrl;
+    private final String notifyUrl;
 
     public PayUCredentials(String posId, String secondKey, String clientId, String clientSecret, String baseUrl) {
         this.posId = posId;
@@ -17,6 +18,7 @@ public class PayUCredentials {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
         this.baseUrl = baseUrl;
+        this.notifyUrl = "http://127.0.0.1/notify/me";
     }
 
     public static PayUCredentials sandbox() {

@@ -69,6 +69,8 @@ public class SalesFacade {
 
         PaymentDetails reservationPaymentDetails = paymentGateway.register(reservation);
 
+        reservation.fillWithPayment(reservationPaymentDetails);
+
         reservationRepository.save(reservation);
 
         return  reservationPaymentDetails;
